@@ -8,7 +8,7 @@ public class Accounts {
     private String category;
     private String content;
     private String note;
-    private String amount;
+    private float amount;
     private Date occuredTime;
 
     public Accounts(String name, String category, String content, String note, String amount, Date occuredTime) {
