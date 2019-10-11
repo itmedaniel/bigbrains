@@ -7,26 +7,26 @@ import java.util.List;
 public class AccountsStatistics {
 
 
-    public float statisticsProfitBy(List<Accounts> accounts, Date date) {
+    public float statisticsProfitBy(List<AccountItems> accountItems, Date date) {
         return 0;
     }
 
-    public float statisticsTotalIncomeBy(List<Accounts> accounts, Date date) {
+    public float statisticsTotalIncomeBy(List<AccountItems> accountItems, Date date) {
         return 0;
     }
 
-    public float statisticsTotalSpendingBy(List<Accounts> accounts, Date date) {
+    public float statisticsTotalSpenBy(List<AccountItems> accountItems, Date date) {
         return 0;
     }
 
-    public List<Accounts> statisticsAccounts(List<Accounts> accounts, Date date) {
+    public List<AccountItems> statisticsAccountsBy(List<AccountItems> accountItems, Date date) {
 
-        List<Accounts> accountsByMonth = new ArrayList<Accounts>();
-        for (Accounts account:accounts) {
-            if (account.getOccuredTime() == date) {
-                accountsByMonth.add(account);
+        List<AccountItems> accountItemsByMonth = new ArrayList<AccountItems>();
+        for (AccountItems accountItem:accountItems) {
+            if (accountItem.getOccuredTime() == date) {
+                accountItemsByMonth.add(accountItem);
             }
         }
-        return accountsByMonth;
+        return accountItemsByMonth;
     }
 }

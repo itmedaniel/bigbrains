@@ -2,8 +2,7 @@ package dangzhengyang.bigbrains;
 
 import java.util.Date;
 
-public class Accounts {
-
+public class AccountItems {
     private String name;
     private String category;
     private String content;
@@ -11,7 +10,7 @@ public class Accounts {
     private float amount;
     private Date occuredTime;
 
-    public Accounts(String name, String category, String content, String note, String amount, Date occuredTime) {
+    public AccountItems(String name, String category, String content, String note, float amount, Date occuredTime) {
         this.name = name;
         this.category = category;
         this.content = content;
@@ -33,7 +32,7 @@ public class Accounts {
     }
 
     public void setCategory(String category) {
-        category = category;
+        this.category = category;
     }
 
     public String getContent() {
@@ -52,11 +51,11 @@ public class Accounts {
         this.note = note;
     }
 
-    public String getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 
@@ -65,6 +64,6 @@ public class Accounts {
     }
 
     public void setOccuredTime(Date occuredTime) {
-        occuredTime = occuredTime;
+        this.occuredTime = occuredTime;
     }
 }
