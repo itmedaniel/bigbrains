@@ -1,16 +1,14 @@
 package dangzhengyang.bigbrains;
 
-import java.util.Date;
-
-public class AccountItems {
+public class AccountItem {
     private String name;
     private String category;
     private String content;
     private String note;
-    private float amount;
-    private Date occuredTime;
+    private double amount;
+    private String occuredTime;
 
-    public AccountItems(String name, String category, String content, String note, float amount, Date occuredTime) {
+    public AccountItem(String name, String category, String content, String note, double amount, String occuredTime) {
         this.name = name;
         this.category = category;
         this.content = content;
@@ -51,19 +49,19 @@ public class AccountItems {
         this.note = note;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Date getOccuredTime() {
+    public String getOccuredTime() {
         return occuredTime;
     }
 
-    public void setOccuredTime(Date occuredTime) {
+    public void setOccuredTime(String occuredTime) {
         this.occuredTime = occuredTime;
     }
 }

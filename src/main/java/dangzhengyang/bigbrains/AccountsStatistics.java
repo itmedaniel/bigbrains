@@ -1,32 +1,49 @@
 package dangzhengyang.bigbrains;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AccountsStatistics {
 
-
-    public float statisticsProfitBy(List<AccountItems> accountItems, Date date) {
-        return 0;
+    public double statisticsProfitBy(List<AccountItem> accountItems, String date) {
+        double totalIncome = statisticsTotalIncomeBy(accountItems, date);
+        double totalSpending = statisticsTotalSpendingBy(accountItems, date);
+        return getProfit(totalIncome, totalSpending);
     }
 
-    public float statisticsTotalIncomeBy(List<AccountItems> accountItems, Date date) {
-        return 0;
+    private double getProfit(double totalIncome, double totalSpending) {
+        return totalIncome - totalSpending;
     }
 
-    public float statisticsTotalSpenBy(List<AccountItems> accountItems, Date date) {
-        return 0;
-    }
-
-    public List<AccountItems> statisticsAccountsBy(List<AccountItems> accountItems, Date date) {
-
-        List<AccountItems> accountItemsByMonth = new ArrayList<AccountItems>();
-        for (AccountItems accountItem:accountItems) {
-            if (accountItem.getOccuredTime() == date) {
-                accountItemsByMonth.add(accountItem);
+    public double statisticsTotalIncomeBy(List<AccountItem> accountItems, String date) {
+        List<AccountItem> accountItemByMonth = statisticsAccountsBy(accountItems, date);
+        double totalIncome = 0.0;
+        for (AccountItem accountItem: accountItemByMonth) {
+            if (accountItem.getCategory().equals("Income")) {
+                totalIncome += accountItem.getAmount();
             }
         }
-        return accountItemsByMonth;
+        return totalIncome;
+    }
+
+    public double statisticsTotalSpendingBy(List<AccountItem> accountItems, String date) {
+        List<AccountItem> accountItemByMonth = statisticsAccountsBy(accountItems, date);
+        double totalSpending = 0.0;
+        for (AccountItem accountItem: accountItemByMonth) {
+            if (accountItem.getCategory().equals("spending")) {
+                totalSpending += accountItem.getAmount();
+            }
+        }
+        return totalSpending;
+    }
+
+    public List<AccountItem> statisticsAccountsBy(List<AccountItem> accountItems, String date) {
+        List<AccountItem> accountItemByMonth = new ArrayList<AccountItem>();
+        for (AccountItem accountItem:accountItems) {
+            if (accountItem.getOccuredTime() == date) {
+                accountItemByMonth.add(accountItem);
+            }
+        }
+        return accountItemByMonth;
     }
 }
