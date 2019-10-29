@@ -24,13 +24,15 @@ public class Account {
     }
 
     public double obtainProfitBy(String date) {
-        List<AccountRecord> accountRecords = obtainAccountRecordsBy(date);
+        List<AccountRecord> records = obtainAccountRecordsBy(date);
         double totalProfit = 0.0;
-        for (AccountRecord accountRecord:accountRecords) {
+        for (AccountRecord accountRecord : records) {
             if (getCategoryDescription(accountRecord).equals("Spending")) {
                 totalProfit -= accountRecord.getAmount();
             }
-            totalProfit += accountRecord.getAmount();
+            else {
+                totalProfit += accountRecord.getAmount();
+            }
         }
         return totalProfit;
     }
@@ -40,9 +42,9 @@ public class Account {
     }
 
     public double obtainTotalIncomeBy(String date) {
-        List<AccountRecord> accountRecords = obtainAccountRecordsBy(date);
+        List<AccountRecord> records = obtainAccountRecordsBy(date);
         double totalIncome = 0.0;
-        for (AccountRecord accountRecord : accountRecords) {
+        for (AccountRecord accountRecord : records) {
             if (getCategoryDescription(accountRecord).equals("Income")) {
                 totalIncome += accountRecord.getAmount();
             }
@@ -51,9 +53,9 @@ public class Account {
     }
 
     public double obtainTotalSpendingBy(String date) {
-        List<AccountRecord> accountRecords = obtainAccountRecordsBy(date);
+        List<AccountRecord> records = obtainAccountRecordsBy(date);
         double totalSpending = 0.0;
-        for (AccountRecord accountRecord : accountRecords) {
+        for (AccountRecord accountRecord : records) {
             if (getCategoryDescription(accountRecord).equals("Spending")) {
                 totalSpending += accountRecord.getAmount();
             }
@@ -66,12 +68,12 @@ public class Account {
     }
 
     public List<AccountRecord> obtainAccountRecordsBy(String date) {
-        List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
-        for (AccountRecord accountRecord : this.accountRecords) {
+        List<AccountRecord> records = new ArrayList<AccountRecord>();
+        for (AccountRecord accountRecord : accountRecords) {
             if (accountRecord.getOccurredTime().substring(0, date.length()).equals(date)) {
-                accountRecords.add(accountRecord);
+                records.add(accountRecord);
             }
         }
-        return accountRecords;
+        return records;
     }
 }

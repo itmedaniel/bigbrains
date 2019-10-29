@@ -12,16 +12,17 @@ import static com.caacetc.bigbrains.AccountCategory.Spending;
 
 public class AccountTest {
 
+    List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
+    AccountRecord accountRecord1 = new AccountRecord("打印", Spending, "试卷打印","", 1.3, "20190211");
+    AccountRecord accountRecord2 = new AccountRecord("用餐", Spending, "食堂用餐","", 0.4, "20190212");
+    AccountRecord accountRecord3 = new AccountRecord("监考", Income, "监考收入","", 3.6, "20190213");
+    AccountRecord accountRecord4 = new AccountRecord("监考", Income, "监考收入","", 3.4, "20190214");
+    AccountRecord accountRecord5 = new AccountRecord("买书", Spending, "买书消费","", 4.6, "20190215");
+    AccountRecord accountRecord6 = new AccountRecord("打印", Spending, "试卷打印","", 1.6, "20190216");
+    AccountRecord accountRecord7 = new AccountRecord("工资", Income, "工资收入","", 3.6, "20190217");
+
+
     public List<AccountRecord> initAccountRecords() {
-        List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
-        AccountRecord accountRecord1 = new AccountRecord("打印", Spending, "试卷打印","", 1.3, "20190316");
-        AccountRecord accountRecord2 = new AccountRecord("用餐", Spending, "食堂用餐","", 0.4, "20190212");
-        AccountRecord accountRecord3 = new AccountRecord("监考", Income, "监考收入","", 3.6, "20190414");
-        AccountRecord accountRecord4 = new AccountRecord("监考", Income, "监考收入","", 3.4, "20190329");
-        AccountRecord accountRecord5 = new AccountRecord("买书", Spending, "买书消费","", 4.6, "20190402");
-        AccountRecord accountRecord6 = new AccountRecord("打印", Spending, "试卷打印","", 1.6, "20190216");
-        AccountRecord accountRecord7 = new AccountRecord("工资", Income, "工资收入","", 33.6, "20190320");
-        accountRecords.add(accountRecord1);
         accountRecords.add(accountRecord1);
         accountRecords.add(accountRecord2);
         accountRecords.add(accountRecord3);
@@ -32,38 +33,7 @@ public class AccountTest {
         return accountRecords;
     }
 
-    AccountRecord accountRecord1 = new AccountRecord("打印",Spending, "试卷打印","", 1.3, "20190316");
-    AccountRecord accountRecord2 = new AccountRecord("用餐", Spending, "食堂用餐","", 0.4, "20190212");
-    AccountRecord accountRecord3 = new AccountRecord("监考", Income, "监考收入","", 3.6, "20190414");
-    AccountRecord accountRecord4 = new AccountRecord("监考", Income, "监考收入","", 3.4, "20190329");
-    AccountRecord accountRecord5 = new AccountRecord("买书", Spending, "买书消费","", 4.6, "20190402");
-    AccountRecord accountRecord6 = new AccountRecord("打印", Spending, "试卷打印","", 1.6, "20190216");
-    AccountRecord accountRecord7 = new AccountRecord("工资", Income, "工资收入","", 33.6, "20190320");
-
-    @Ignore
-    @Test
-    public void should_addAll() {
-        Account account = new Account();
-        List<AccountRecord> records1 = new ArrayList<AccountRecord>();
-        records1.add(accountRecord1);
-        records1.add(accountRecord2);
-        List<AccountRecord> records2 = new ArrayList<AccountRecord>();
-        records2.add(accountRecord3);
-        records2.add(accountRecord4);
-        account.addAll(records1).addAll(records2);
-        System.out.println(account.accountRecords);
-        printRecords(account.accountRecords);
-    }
-
-    @Ignore
-    @Test
-    public void should_add() {
-        Account account = new Account();
-        account.add(accountRecord1).add(accountRecord2);
-        printRecords(account.accountRecords);
-    }
-
-    @Ignore
+//    @Ignore
     @Test
     public void should_obtain_profit_by_date() {
         List<AccountRecord> records = initAccountRecords();
@@ -72,7 +42,7 @@ public class AccountTest {
         System.out.println(totalProfit);
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void should_obtain_total_income_by_date() {
         List<AccountRecord> records = initAccountRecords();
