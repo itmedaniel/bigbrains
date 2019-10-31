@@ -7,7 +7,7 @@ import com.google.gson.Gson;
  * @date 2019/10/17
  * */
 
-public class AccountRecord {
+public class AccountItem {
     private String name;
     private AccountCategory accountCategory;
     private String content;
@@ -15,7 +15,7 @@ public class AccountRecord {
     private double amount;
     private String occurredTime;
 
-    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, double amount, String occurredTime) {
+    public AccountItem(String name, AccountCategory accountCategory, String content, String note, double amount, String occurredTime) {
         this.name = name;
         this.accountCategory = accountCategory;
         this.content = content;
@@ -26,10 +26,6 @@ public class AccountRecord {
 
     public String getName() {
         return name;
-    }
-
-    public AccountCategory getAccountCategory() {
-        return accountCategory;
     }
 
     public String getContent() {
@@ -48,9 +44,12 @@ public class AccountRecord {
         return occurredTime;
     }
 
-    public String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+    public boolean isIncome() {
+        return accountCategory == AccountCategory.Income;
+    }
+
+    public boolean isSpending() {
+        return accountCategory == AccountCategory.Spending;
     }
 }
 
