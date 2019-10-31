@@ -5,7 +5,7 @@ package com.caacetc.bigbrains;
  * @date 2019/10/17
  * */
 
-public class AccountItem {
+public class AccountRecord {
     private String name;
     private AccountCategory accountCategory;
     private String content;
@@ -13,7 +13,7 @@ public class AccountItem {
     private double amount;
     private String occurredTime;
 
-    public AccountItem(String name, AccountCategory accountCategory, String content, String note, double amount, String occurredTime) {
+    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, double amount, String occurredTime) {
         this.name = name;
         this.accountCategory = accountCategory;
         this.content = content;

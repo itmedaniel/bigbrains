@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class Account {
-    protected List<AccountItem> accountItems = new ArrayList<AccountItem>();
+    protected List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
 
-    public void add(AccountItem accountItem) {
-        accountItems.add(accountItem);
+    public void add(AccountRecord accountRecord) {
+        accountRecords.add(accountRecord);
     }
 
-    public void addAll(List<AccountItem> records) {
-        accountItems.addAll(records);
+    public void addAll(List<AccountRecord> records) {
+        accountRecords.addAll(records);
     }
 
     public abstract double profitBy(String date);
@@ -22,28 +22,28 @@ public abstract class Account {
 
     public abstract double totalSpendingBy(String date);
 
-    public List<AccountItem> allIncomeRecords() {
+    public List<AccountRecord> allIncomeRecords() {
         return accountRecordsBy(ar -> ar.isIncome());
     }
 
-    public List<AccountItem> allSpendingRecords() {
+    public List<AccountRecord> allSpendingRecords() {
         return accountRecordsBy(ar -> ar.isSpending());
     }
 
-    public List<AccountItem> accountRecordsBy(Predicate<AccountItem> predicate) {
+    public List<AccountRecord> accountRecordsBy(Predicate<AccountRecord> predicate) {
         if (predicate == null) {
             return new ArrayList<>();
         }
-        return accountItems.stream().filter(predicate).collect(Collectors.toList());
+        return accountRecords.stream().filter(predicate).collect(Collectors.toList());
     }
 
-    public List<AccountItem> accountRecordsBy(String date) {
-        List<AccountItem> accountItems = new ArrayList<AccountItem>();
-        for (AccountItem accountItem : this.accountItems) {
-            if (accountItem.getOccurredTime().substring(0, date.length()).equals(date)) {
-                accountItems.add(accountItem);
+    public List<AccountRecord> accountRecordsBy(String date) {
+        List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
+        for (AccountRecord accountRecord : this.accountRecords) {
+            if (accountRecord.getOccurredTime().substring(0, date.length()).equals(date)) {
+                accountRecords.add(accountRecord);
             }
         }
-        return accountItems;
+        return accountRecords;
     }
 }

@@ -17,11 +17,11 @@ public class RegularAccount extends Account {
 
     @Override
     public double totalIncomeBy(String date) {
-        List<AccountItem> accountItems = accountRecordsBy(date);
+        List<AccountRecord> accountRecords = accountRecordsBy(date);
         double totalIncome = 0.0;
-        for (AccountItem accountItem : accountItems) {
-            if (accountItem.isIncome()) {
-                totalIncome += accountItem.getAmount();
+        for (AccountRecord accountRecord : accountRecords) {
+            if (accountRecord.isIncome()) {
+                totalIncome += accountRecord.getAmount();
             }
         }
         return totalIncome;
@@ -29,11 +29,11 @@ public class RegularAccount extends Account {
 
     @Override
     public double totalSpendingBy(String date) {
-        List<AccountItem> accountItems = accountRecordsBy(date);
+        List<AccountRecord> accountRecords = accountRecordsBy(date);
         double totalSpending = 0.0;
-        for (AccountItem accountItem : accountItems) {
-            if (accountItem.isSpending()) {
-                totalSpending += accountItem.getAmount();
+        for (AccountRecord accountRecord : accountRecords) {
+            if (accountRecord.isSpending()) {
+                totalSpending += accountRecord.getAmount();
             }
         }
         return totalSpending;
