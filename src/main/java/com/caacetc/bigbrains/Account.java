@@ -1,5 +1,6 @@
 package com.caacetc.bigbrains;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,11 +17,11 @@ public abstract class Account {
         accountRecords.addAll(records);
     }
 
-    public abstract double profitBy(String date);
+    public abstract BigDecimal profitBy(String date);
 
-    public abstract double totalIncomeBy(String date);
+    public abstract BigDecimal totalIncomeBy(String date);
 
-    public abstract double totalSpendingBy(String date);
+    public abstract BigDecimal totalSpendingBy(String date);
 
     public List<AccountRecord> allIncomeRecords() {
         return accountRecordsBy(ar -> ar.isIncome());
@@ -37,9 +38,11 @@ public abstract class Account {
         return accountRecords.stream().filter(predicate).collect(Collectors.toList());
     }
 
+
+
     public List<AccountRecord> accountRecordsBy(String date) {
         List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
-        for (AccountRecord accountRecord : this.accountRecords) {
+        for (AccountRecord accountRecord : accountRecords) {
             if (accountRecord.getOccurredTime().substring(0, date.length()).equals(date)) {
                 accountRecords.add(accountRecord);
             }

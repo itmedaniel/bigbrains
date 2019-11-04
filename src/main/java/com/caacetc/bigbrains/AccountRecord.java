@@ -1,5 +1,7 @@
 package com.caacetc.bigbrains;
 
+import java.math.BigDecimal;
+
 /**
  * @author dangzhengyang
  * @date 2019/10/17
@@ -10,10 +12,10 @@ public class AccountRecord {
     private AccountCategory accountCategory;
     private String content;
     private String note;
-    private double amount;
+    private BigDecimal amount;
     private String occurredTime;
 
-    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, double amount, String occurredTime) {
+    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, BigDecimal amount, String occurredTime) {
         this.name = name;
         this.accountCategory = accountCategory;
         this.content = content;
@@ -34,7 +36,7 @@ public class AccountRecord {
         return note;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
@@ -48,6 +50,13 @@ public class AccountRecord {
 
     public boolean isSpending() {
         return accountCategory == AccountCategory.Spending;
+    }
+
+    @Override
+    public String toString() {
+        return  "name :" + name + " type :" + accountCategory
+                +" content :" + content + " note :" + note
+                +" amount :" + amount + " occurredTime :" + occurredTime;
     }
 }
 
