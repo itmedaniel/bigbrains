@@ -35,6 +35,18 @@ public class RegularAccountTest {
     }
 
     @Test
+    public void should_filter_records_by_date_with_predicate() {
+        // given
+        account.addAll(allAccountRecords);
+
+        // when
+        List<AccountRecord> accountRecords = account.accountRecordsBy(accountRecord -> "20190212" == accountRecord.getOccurredTime());
+
+        // then
+        assertThat(accountRecords).hasSize(1);
+    }
+
+    @Test
     public void should_calculate_profit_for_account() {
         //given
         account.addAll(allAccountRecords);
@@ -48,6 +60,18 @@ public class RegularAccountTest {
 
     @Test
     public void should_calculate_total_income_by_date() {
+        // given
+        account.addAll(allAccountRecords);
+
+        // when
+        BigDecimal totalIncome = account.totalIncomeBy("201903");
+
+        // then
+        assertThat(totalIncome).isEqualTo(new BigDecimal("37.0"));
+    }
+
+    @Test
+    public void should_calculate_total_income_with_reduce_by_date() {
         // given
         account.addAll(allAccountRecords);
 
@@ -98,5 +122,12 @@ public class RegularAccountTest {
 
     private AccountRecord createIncomeAccountItem(String name, String content, BigDecimal amount, String occurredTime) {
         return new AccountRecord(name, Income, content,"", amount, occurredTime);
+    }
+
+    private void print(List<AccountRecord> accountRecords) {
+        for (AccountRecord accountRecord:accountRecords) {
+            System.out.println(accountRecord.toString());
+
+        }
     }
 }

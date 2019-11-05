@@ -24,29 +24,21 @@ public abstract class Account {
     public abstract BigDecimal totalSpendingBy(String date);
 
     public List<AccountRecord> allIncomeRecords() {
-        return accountRecordsBy(ar -> ar.isIncome());
+        return accountRecordsBy(accountRecord -> accountRecord.isIncome());
     }
 
     public List<AccountRecord> allSpendingRecords() {
-        return accountRecordsBy(ar -> ar.isSpending());
+        return accountRecordsBy(accountRecord -> accountRecord.isSpending());
+    }
+
+    public List<AccountRecord> allRecordsBy(String date) {
+        return accountRecordsBy(accountRecord -> date == accountRecord.getOccurredTime());
     }
 
     public List<AccountRecord> accountRecordsBy(Predicate<AccountRecord> predicate) {
-        if (predicate == null) {
-            return new ArrayList<>();
-        }
-        return accountRecords.stream().filter(predicate).collect(Collectors.toList());
-    }
-
-
-
-    public List<AccountRecord> accountRecordsBy(String date) {
-        List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
-        for (AccountRecord accountRecord : accountRecords) {
-            if (accountRecord.getOccurredTime().substring(0, date.length()).equals(date)) {
-                accountRecords.add(accountRecord);
+            if (predicate == null) {
+                return new ArrayList<>();
             }
-        }
-        return accountRecords;
+            return accountRecords.stream().filter(predicate).collect(Collectors.toList());
     }
 }
