@@ -7,6 +7,7 @@ package com.caacetc.bigbrains;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class RegularAccount extends Account {
@@ -18,31 +19,24 @@ public class RegularAccount extends Account {
 
     @Override
     public BigDecimal totalIncomeBy(String date) {
-        List<AccountRecord> accountRecords = allIncomeRecords();
-        BigDecimal totalIncome = new BigDecimal("0");
-
-        accountRecords.stream().reduce(totalIncome, (acA, acB) -> acA.getAmount()+(acB.getAmount()));
-        return totalIncome;
-
-//        return accountRecords.stream()
-//                .filter(accountRecord -> accountRecord.isIncome())
-//                .reduce(totalIncome, (accountRecord, acB) -> accountRecord.getAmount().add(acB.getAmount()));
-    }
-
-    private BigDecimal add(AccountRecord acA, AccountRecord acB) {
-        return acA.getAmount().add(acB.getAmount());
+        List<AccountRecord> accountRecords = allRecordsBy(date);
+        List<BigDecimal> incomeAmounts = accountRecords.stream()
+                .filter(AccountRecord::isIncome)
+                .map(AccountRecord::getAmount).collect(Collectors.toList());
+        return sum(incomeAmounts);
     }
 
     @Override
     public BigDecimal totalSpendingBy(String date) {
-        List<AccountRecord> accountRecords = accountRecordsBy(accountRecord -> accountRecord.getOccurredTime() == date);
-        BigDecimal totalSpending = new BigDecimal("0");
-        for (AccountRecord accountRecord : accountRecords) {
-            if (accountRecord.isSpending()) {
-                totalSpending = totalSpending.add(accountRecord.getAmount());
-            }
-        }
-        return totalSpending;
+        List<AccountRecord> accountRecords = allRecordsBy(date);
+        List<BigDecimal> spendingAmounts = accountRecords.stream()
+                .filter(AccountRecord::isSpending)
+                .map(AccountRecord::getAmount).collect(Collectors.toList());
+        return sum(spendingAmounts);
     }
 
+    private BigDecimal sum(List<BigDecimal> list) {
+        BigDecimal totalIncome = new BigDecimal("0");
+        return list.stream().reduce(totalIncome, (a, b) -> a.add(b));
+    }
 }
