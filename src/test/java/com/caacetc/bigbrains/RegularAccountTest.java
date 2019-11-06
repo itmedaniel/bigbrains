@@ -35,12 +35,12 @@ public class RegularAccountTest {
     }
 
     @Test
-    public void should_filter_records_by_date_and_predicate() {
+    public void should_filter_records_by_date() {
         // given
         account.addAll(allAccountRecords);
 
         // when
-        List<AccountRecord> accountRecords = account.accountRecordsBy(accountRecord -> "20190212" == accountRecord.getOccurredTime());
+        List<AccountRecord> accountRecords = account.allRecordsBy("20190212");
 
         // then
         assertThat(accountRecords).hasSize(7);
@@ -111,7 +111,7 @@ public class RegularAccountTest {
         return new AccountRecord(name, Income, content,"", amount, occurredTime);
     }
 
-    private void print(List<AccountRecord> accountRecords) {
+    private void printAccountRecord(List<AccountRecord> accountRecords) {
         for (AccountRecord accountRecord:accountRecords) {
             System.out.println(accountRecord.toString());
 
