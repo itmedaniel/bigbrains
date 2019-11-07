@@ -1,6 +1,7 @@
 package com.caacetc.bigbrains;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * @author dangzhengyang
@@ -13,9 +14,9 @@ public class AccountRecord {
     private String content;
     private String note;
     private BigDecimal amount;
-    private String occurredTime;
+    private LocalDate occurredTime;
 
-    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, BigDecimal amount, String occurredTime) {
+    public AccountRecord(String name, AccountCategory accountCategory, String content, String note, BigDecimal amount, LocalDate occurredTime) {
         this.name = name;
         this.accountCategory = accountCategory;
         this.content = content;
@@ -40,7 +41,7 @@ public class AccountRecord {
         return amount;
     }
 
-    public String getOccurredTime() {
+    public LocalDate getOccurredTime() {
         return occurredTime;
     }
 
@@ -52,8 +53,8 @@ public class AccountRecord {
         return accountCategory == AccountCategory.Spending;
     }
 
-    public boolean isDate(String date) {
-        return date == occurredTime;
+    public boolean isDate(LocalDate date) {
+        return date.isEqual(occurredTime);
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RegularAccountTest {
     private List<AccountRecord> allAccountRecords;
     private Account account;
+    private LocalDate date;
 
     @Before
     public void setup() {
         allAccountRecords = initAccountRecords();
         account = new RegularAccount();
+        date = LocalDate.of(2019,02,12);
     }
 
     @Test
@@ -40,7 +43,7 @@ public class RegularAccountTest {
         account.addAll(allAccountRecords);
 
         // when
-        List<AccountRecord> accountRecords = account.allRecordsBy("20190212");
+        List<AccountRecord> accountRecords = account.allRecordsBy(date);
 
         // then
         assertThat(accountRecords).hasSize(7);
@@ -52,7 +55,7 @@ public class RegularAccountTest {
         account.addAll(allAccountRecords);
 
         //when
-        BigDecimal totalProfit = account.profitBy("20190212");
+        BigDecimal totalProfit = account.profitBy(date);
 
         //then
         assertThat(totalProfit).isEqualTo(new BigDecimal("32.7"));
@@ -64,7 +67,7 @@ public class RegularAccountTest {
         account.addAll(allAccountRecords);
 
         // when
-        BigDecimal totalIncome = account.totalIncomeBy("20190212");
+        BigDecimal totalIncome = account.totalIncomeBy(date);
 
         // then
         assertThat(totalIncome).isEqualTo(new BigDecimal("40.6"));
@@ -76,7 +79,7 @@ public class RegularAccountTest {
         account.addAll(allAccountRecords);
 
         // when
-        BigDecimal totalSpending = account.totalSpendingBy("20190212");
+        BigDecimal totalSpending = account.totalSpendingBy(date);
 
         // then
         assertThat(totalSpending).isEqualTo(new BigDecimal("7.9"));
@@ -84,13 +87,13 @@ public class RegularAccountTest {
 
     private List<AccountRecord> initAccountRecords() {
         List<AccountRecord> accountRecords = new ArrayList<AccountRecord>();
-        AccountRecord accountRecord1 = createSpendingAccountRecord("打印", "试卷打印", new BigDecimal("1.3"), "20190212");
-        AccountRecord accountRecord2 = createSpendingAccountRecord("用餐", "食堂用餐", new BigDecimal("0.4"), "20190212");
-        AccountRecord accountRecord3 = createIncomeAccountRecord("监考", "监考收入", new BigDecimal("3.6"), "20190212");
-        AccountRecord accountRecord4 = createIncomeAccountRecord("监考", "监考收入", new BigDecimal("3.4"), "20190212");
-        AccountRecord accountRecord5 = createSpendingAccountRecord("买书", "买书消费", new BigDecimal("4.6"), "20190212");
-        AccountRecord accountRecord6 = createSpendingAccountRecord("打印", "试卷打印", new BigDecimal("1.6"), "20190212");
-        AccountRecord accountRecord7 = createIncomeAccountRecord("工资", "工资收入", new BigDecimal("33.6"), "20190212");
+        AccountRecord accountRecord1 = createSpendingAccountRecord("打印", "试卷打印", new BigDecimal("1.3"), setTime());
+        AccountRecord accountRecord2 = createSpendingAccountRecord("用餐", "食堂用餐", new BigDecimal("0.4"), setTime());
+        AccountRecord accountRecord3 = createIncomeAccountRecord("监考", "监考收入", new BigDecimal("3.6"), setTime());
+        AccountRecord accountRecord4 = createIncomeAccountRecord("监考", "监考收入", new BigDecimal("3.4"), setTime());
+        AccountRecord accountRecord5 = createSpendingAccountRecord("买书", "买书消费", new BigDecimal("4.6"), setTime());
+        AccountRecord accountRecord6 = createSpendingAccountRecord("打印", "试卷打印", new BigDecimal("1.6"), setTime());
+        AccountRecord accountRecord7 = createIncomeAccountRecord("工资", "工资收入", new BigDecimal("33.6"), setTime());
 
         accountRecords.add(accountRecord1);
         accountRecords.add(accountRecord2);
@@ -103,11 +106,15 @@ public class RegularAccountTest {
         return accountRecords;
     }
 
-    private AccountRecord createSpendingAccountRecord(String name, String category, BigDecimal amount, String occurredTime) {
+    private LocalDate setTime() {
+        return LocalDate.of(2019,02,12);
+    }
+
+    private AccountRecord createSpendingAccountRecord(String name, String category, BigDecimal amount, LocalDate occurredTime) {
         return new AccountRecord(name,Spending, category,"", amount, occurredTime);
     }
 
-    private AccountRecord createIncomeAccountRecord(String name, String content, BigDecimal amount, String occurredTime) {
+    private AccountRecord createIncomeAccountRecord(String name, String content, BigDecimal amount, LocalDate occurredTime) {
         return new AccountRecord(name, Income, content,"", amount, occurredTime);
     }
 

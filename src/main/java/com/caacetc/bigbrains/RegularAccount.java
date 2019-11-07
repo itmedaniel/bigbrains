@@ -6,6 +6,7 @@ package com.caacetc.bigbrains;
  * */
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,12 +14,12 @@ import java.util.stream.Collectors;
 public class RegularAccount extends Account {
 
     @Override
-    public BigDecimal profitBy(String date) {
+    public BigDecimal profitBy(LocalDate date) {
         return totalIncomeBy(date).subtract(totalSpendingBy(date));
     }
 
     @Override
-    public BigDecimal totalIncomeBy(String date) {
+    public BigDecimal totalIncomeBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
         List<BigDecimal> incomeAmounts = accountRecords.stream()
                 .filter(AccountRecord::isIncome)
@@ -27,7 +28,7 @@ public class RegularAccount extends Account {
     }
 
     @Override
-    public BigDecimal totalSpendingBy(String date) {
+    public BigDecimal totalSpendingBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
         List<BigDecimal> spendingAmounts = accountRecords.stream()
                 .filter(AccountRecord::isSpending)
