@@ -8,7 +8,6 @@ package com.caacetc.bigbrains;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class RegularAccount extends Account {
@@ -21,23 +20,24 @@ public class RegularAccount extends Account {
     @Override
     public BigDecimal totalIncomeBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
-        List<BigDecimal> incomeAmounts = accountRecords.stream()
+        BigDecimal totalIncome = accountRecords.stream()
                 .filter(AccountRecord::isIncome)
-                .map(AccountRecord::getAmount).collect(Collectors.toList());
-        return sum(incomeAmounts);
+                .map(AccountRecord::getAmount)
+                .reduce(new BigDecimal("0"), (a, b) -> a.add(b));
+        return totalIncome;
     }
 
     @Override
     public BigDecimal totalSpendingBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
-        List<BigDecimal> spendingAmounts = accountRecords.stream()
+        BigDecimal totalSpending = accountRecords.stream()
                 .filter(AccountRecord::isSpending)
-                .map(AccountRecord::getAmount).collect(Collectors.toList());
-        return sum(spendingAmounts);
+                .map(AccountRecord::getAmount)
+                .reduce(new BigDecimal("0"), (a, b) -> a.add(b));
+        return totalSpending;
     }
 
-    private BigDecimal sum(List<BigDecimal> list) {
-        BigDecimal totalIncome = new BigDecimal("0");
-        return list.stream().reduce(totalIncome, (a, b) -> a.add(b));
+    private BigDecimal sum(BigDecimal a, BigDecimal b) {
+        return a.add(b);
     }
 }

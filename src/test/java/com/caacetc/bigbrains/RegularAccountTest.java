@@ -121,7 +121,6 @@ public class RegularAccountTest {
     private void printAccountRecord(List<AccountRecord> accountRecords) {
         for (AccountRecord accountRecord:accountRecords) {
             System.out.println(accountRecord.toString());
-
         }
     }
 }

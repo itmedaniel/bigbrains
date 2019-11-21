@@ -25,10 +25,10 @@ public class TimeTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(LocalDate.now());
-        System.out.println(localDateFormat(LocalDate.now(),FORMAT_PATTERN3));
-        System.out.println(localDateTimeFormat(LocalDateTime.now(),FORMAT_PATTERN1));
-//        System.out.println(localDateTimeFormat(LocalDateTime.now(),FORMAT_PATTERN2));
+
+//        System.out.println(localDateFormat(LocalDate.now(),FORMAT_PATTERN3));
+//        System.out.println(localDateTimeFormat(LocalDateTime.now(),FORMAT_PATTERN1));
+        System.out.println(localDateTimeFormat(LocalDateTime.now(),FORMAT_PATTERN2));
 //        System.out.println(localDateTimeToDate(LocalDateTime.now()));
 //        System.out.println(dateFormat(new Date(),FORMAT_PATTERN4));
 //        System.out.println(minusToMillsLocalDateTime(LocalDateTime.now(),LocalDateTime.now().minusSeconds(1)));
