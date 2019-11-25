@@ -18,6 +18,14 @@ public abstract class Account {
         accountRecords.addAll(records);
     }
 
+    public  void delete(AccountRecord accountRecord) {
+        accountRecords.remove(accountRecord);
+    }
+
+    public  void deleteAll(List<AccountRecord> accountRecords) {
+        accountRecords.removeAll(accountRecords);
+    }
+
     public abstract BigDecimal profitBy(LocalDate date);
 
     public abstract BigDecimal totalIncomeBy(LocalDate date);

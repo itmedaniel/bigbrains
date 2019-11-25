@@ -53,10 +53,6 @@ public class AccountRecord {
         return accountCategory == AccountCategory.Spending;
     }
 
-    public boolean isDate(LocalDate date) {
-        return date.isEqual(occurredTime);
-    }
-
     @Override
     public String toString() {
         return  "name :" + name + " type :" + accountCategory

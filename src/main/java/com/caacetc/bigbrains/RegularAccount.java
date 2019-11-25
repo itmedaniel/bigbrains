@@ -20,24 +20,18 @@ public class RegularAccount extends Account {
     @Override
     public BigDecimal totalIncomeBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
-        BigDecimal totalIncome = accountRecords.stream()
+        return accountRecords.stream()
                 .filter(AccountRecord::isIncome)
                 .map(AccountRecord::getAmount)
-                .reduce(new BigDecimal("0"), (a, b) -> a.add(b));
-        return totalIncome;
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
     }
 
     @Override
     public BigDecimal totalSpendingBy(LocalDate date) {
         List<AccountRecord> accountRecords = allRecordsBy(date);
-        BigDecimal totalSpending = accountRecords.stream()
+        return accountRecords.stream()
                 .filter(AccountRecord::isSpending)
                 .map(AccountRecord::getAmount)
-                .reduce(new BigDecimal("0"), (a, b) -> a.add(b));
-        return totalSpending;
-    }
-
-    private BigDecimal sum(BigDecimal a, BigDecimal b) {
-        return a.add(b);
+                .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
     }
 }
