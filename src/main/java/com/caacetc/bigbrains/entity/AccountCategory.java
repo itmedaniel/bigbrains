@@ -1,4 +1,4 @@
-package com.caacetc.bigbrains;
+package com.caacetc.bigbrains.entity;
 
 /**
  * @author dangzhengyang

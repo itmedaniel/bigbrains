@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caacetc.bigbrains.dao.AccountRecordMapper">
+  <resultMap id="BaseResultMap" type="com.caacetc.bigbrains.entity.AccountRecord">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="accountCategory" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="occurredTime" javaType="java.time.LocalDate" jdbcType="DATE" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, accountCategory, content, note, amount, occurredTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_record
+    where name = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_record
+    where name = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.caacetc.bigbrains.entity.AccountRecord">
+    insert into account_record (id, name, accountCategory, content, note,amount)
+    values (#{id}, #{name}, #{accountCategory}, #{content}, #{note}, #{amount})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caacetc.bigbrains.entity.AccountRecord">
+    insert into account_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="accountCategory != null">
+        accountCategory,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="occurredTime != null">
+        occurredTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="accountCategory != null">
+        #{accountCategory},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+      <if test="note != null">
+        #{note},
+      </if>
+      <if test="amount != null">
+        #{amount},
+      </if>
+      <if test="occurredTime != null">
+        #{occurredTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caacetc.bigbrains.entity.AccountRecord">
+    update account_record
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="accountCategory != null">
+        accountCategory = #{accountCategory},
+      </if>
+      <if test="content != null">
+        content = #{content},
+      </if>
+      <if test="note != null">
+        note = #{note},
+      </if>
+      <if test="amount != null">
+        amount = #{amount},
+      </if>
+      <if test="occurredTime != null">
+        occurredTime = #{occurredTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caacetc.bigbrains.entity.AccountRecord">
+    update account_record
+    set name = #{name},
+    accountCategory = #{accountCategory},
+    content = #{content},
+    note = #{note},
+    amount = #{amount},
+    occurredTime = #{occurredTime}
+    where id = #{id}
+  </update>
+
+  <select id="getProfitByMonth" resultType="java.math.BigDecimal">
+    SELECT SUM(amount*accountCategory) as profit
+    FROM account_record
+    <trim prefix="where " suffix=" " suffixOverrides="and">
+      <if test="year != null">
+        #{year}=YEAR(occurredTime) and
+      </if>
+      <if test="month != null">
+        #{month}=MONTH(occurredTime)
+      </if>
+    </trim>
+  </select>
+  <select id="getTotalIncomeByMonth" resultType="java.math.BigDecimal">
+    SELECT SUM(amount) as profit
+    FROM account_record
+    <trim prefix="where " suffix=" " suffixOverrides="and">
+      <if test="year != null">
+        #{year}=YEAR(occurredTime) and
+      </if>
+      <if test="month != null">
+        #{month}=MONTH(occurredTime)
+      </if>
+    </trim>
+    and accountCategory=1
+  </select>
+  <select id="getTotalSpendByMonth" resultType="java.math.BigDecimal">
+    SELECT SUM(amount) as profit
+    FROM account_record
+    <trim prefix="where " suffix=" " suffixOverrides="and">
+      <if test="year != null">
+        #{year}=YEAR(occurredTime) and
+      </if>
+      <if test="month != null">
+        #{month}=MONTH(occurredTime)
+      </if>
+    </trim>
+    and accountCategory=-1
+  </select>
+  <select id="getAllAmountByMonth" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM account_record
+    <trim prefix="where " suffix=" " suffixOverrides="and">
+      <if test="year != null">
+        #{year}=YEAR(occurredTime) and
+      </if>
+      <if test="month != null">
+        #{month}=MONTH(occurredTime)
+      </if>
+    </trim>
+  </select>
+</mapper>

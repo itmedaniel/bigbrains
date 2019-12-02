@@ -1,4 +1,4 @@
-package com.caacetc.bigbrains;
+package com.caacetc.bigbrains.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

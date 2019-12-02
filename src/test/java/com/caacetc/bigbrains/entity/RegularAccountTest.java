@@ -1,4 +1,4 @@
-package com.caacetc.bigbrains;
+package com.caacetc.bigbrains.entity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.caacetc.bigbrains.AccountCategory.Income;
-import static com.caacetc.bigbrains.AccountCategory.Spending;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -111,11 +109,11 @@ public class RegularAccountTest {
     }
 
     private AccountRecord createSpendingAccountRecord(String name, String category, BigDecimal amount, LocalDate occurredTime) {
-        return new AccountRecord(name,Spending, category,"", amount, occurredTime);
+        return new AccountRecord(name,-1, category,"", amount, occurredTime);
     }
 
     private AccountRecord createIncomeAccountRecord(String name, String content, BigDecimal amount, LocalDate occurredTime) {
-        return new AccountRecord(name, Income, content,"", amount, occurredTime);
+        return new AccountRecord(name, 1, content,"", amount, occurredTime);
     }
 
     private void printAccountRecord(List<AccountRecord> accountRecords) {
