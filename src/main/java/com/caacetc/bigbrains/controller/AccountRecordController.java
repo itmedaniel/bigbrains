@@ -91,6 +91,7 @@ public class AccountRecordController {
     @ResponseBody
     public String addBy(AccountRecord accountRecord) {
         accountRecord.setId(null);
+        System.out.println("account:"+accountRecord.getAmount()+"date:"+accountRecord.getOccurredTime());
         int result = accountRecordService.insertSelective(accountRecord);
         return result>0?"新增成功":"新增失败";
     }

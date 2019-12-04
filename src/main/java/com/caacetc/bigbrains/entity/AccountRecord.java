@@ -34,8 +34,9 @@ public class AccountRecord {
         this.content = content;
         this.note = note;
         this.amount = amount;
+        System.out.println("date"+TimeUtil.localDateParse(occurredTime,TimeUtil.FORMAT_PATTERN3));
         this.occurredTime = TimeUtil.localDateParse(occurredTime,TimeUtil.FORMAT_PATTERN3);
-    }
+}
 
 
     public AccountRecord(String name, Integer accountCategory, String content, String note, BigDecimal amount, LocalDate occurredTime) {
@@ -44,6 +45,7 @@ public class AccountRecord {
         this.content = content;
         this.note = note;
         this.amount = amount;
+        System.out.println("date"+occurredTime.toString());
         this.occurredTime = occurredTime;
     }
 

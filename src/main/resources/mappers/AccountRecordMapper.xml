@@ -71,10 +71,10 @@
         #{note},
       </if>
       <if test="amount != null">
-        #{amount},
+        #{amount,jdbcType="DECIMAL"},
       </if>
       <if test="occurredTime != null">
-        #{occurredTime},
+        #{occurredTime,jdbcType="DATE"},
       </if>
     </trim>
   </insert>
