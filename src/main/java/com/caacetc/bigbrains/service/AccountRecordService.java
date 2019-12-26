@@ -7,9 +7,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AccountRecordService {
+
     BigDecimal profitBy(LocalDate date);
+
     BigDecimal totalIncomeBy(LocalDate date);
+
     BigDecimal totalSpendingBy(LocalDate date);
+
     List<AccountRecord> allAccountBy(LocalDate date);
 
     int insertSelective(AccountRecord record);

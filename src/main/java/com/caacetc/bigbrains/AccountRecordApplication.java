@@ -16,9 +16,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan(basePackages = "com.caacetc.bigbrains.dao")
 @EnableTransactionManagement
 @EnableScheduling
-public class AccoutApplication extends SpringBootServletInitializer {
+public class AccountRecordApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
-        SpringApplication.run(AccoutApplication.class,args);
+        SpringApplication.run(AccountRecordApplication.class,args);
     }
 }
 
