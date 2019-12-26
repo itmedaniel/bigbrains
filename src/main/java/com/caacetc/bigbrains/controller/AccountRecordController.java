@@ -1,7 +1,7 @@
 package com.caacetc.bigbrains.controller;
 
 import com.caacetc.bigbrains.entity.AccountRecord;
-import com.caacetc.bigbrains.service.AccountRecordService;
+import com.caacetc.bigbrains.service.impl.AccountRecordService;
 import com.caacetc.bigbrains.utils.TimeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
